@@ -1,1 +1,24 @@
-<p>car-add works!</p>
+<div class="content">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header"><h5 class="title">Araç Ekle</h5>
+                <div class="card-body">
+                    <form [formGroup]="carAddForm">
+                        <div class="form-group">
+                            <input type="text" id="carName" formControlName="carName" class="form-control" placeholder="Araç Adı"/>
+                            <input type="text" id="numberPlate" formControlName="numberPlate" class="form-control" placeholder="Plaka"/>
+                            <input type="text" id="modelYear" formControlName="modelYear" class="form-control" placeholder="Model Yılı"/>
+                            <input type="text" id="inspectionDate" formControlName="inspectionDate" class="form-control" placeholder="Muayene Tarihi"/>
+                            <input type="text" id="PermitImage" formControlName="PermitImage" class="form-control" placeholder="Ruhsat Fotografı"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-fill btn-primary" (click)="add()">EKLE</button>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+    
+</div>

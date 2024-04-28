@@ -27,8 +27,18 @@
                     style="margin-right: 10px"
                     (click)="openDeleteModal(template1,car.carId)"
                   >
-                    Delete
-                  </button></td>
+                Sil
+                  </button>
+
+
+                  <button
+                  class="btn btn-success"
+                  routerLink="cars/update/{{ car.carId }}"
+                >
+                  Güncelle
+                </button>
+                
+                </td>
                
 
             </tr>
@@ -36,3 +46,17 @@
     </table>
 </div>
 
+<ng-template #template1>
+    <div class="modal-header">
+      <h4 class="modal-title">Silmek istediğine emin misin?</h4>
+  
+    </div>
+    <div class="modal-body">
+      <button type="button" class="btn btn-default" (click)="deleteCar()">
+        Evet
+      </button>
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+        Çıkış
+      </button>
+    </div>
+  </ng-template>

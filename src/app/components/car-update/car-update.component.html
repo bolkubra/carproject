@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form [formGroup]="carUpdateForm">
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="carId" id="carId" formControlName="carId"
+                        readonly />
+                </div>
+               
+                
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="carName" id="carName"
+                        formControlName="carName" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="number" class="form-control" placeholder="modelYear" id="modelYear"
+                        formControlName="modelYear" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="datetime" class="form-control" placeholder="inspectionDate" id="inspectionDate"
+                        formControlName="inspectionDate" />
+                </div>
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="PermitImage" id="PermitImage"
+                        formControlName="PermitImage" />
+                </div>
+                <button class="btn btn-success" (click)="addUpdateCar()">Update</button>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>

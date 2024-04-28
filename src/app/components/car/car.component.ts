@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import { CarResponseModel } from 'src/app/models/carResponseModel';
 import { CarService } from 'src/app/services/car.service';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+
 
 
 
@@ -16,9 +18,9 @@ export class CarComponent implements OnInit {
   
   cars : Car [] = [];
   dataLoaded = false;
- 
-
- 
+  carId : number;
+  modalRef : BsModalRef;
+  
 
   carResponseModel : CarResponseModel={
     data : this.cars,
@@ -26,7 +28,9 @@ export class CarComponent implements OnInit {
     success : true,
   };
   constructor(private carService:CarService,
-    private toastrService : ToastrService){}
+    private toastrService : ToastrService,
+    private modalService : BsModalService
+  ){}
 
   ngOnInit(): void {
    this.getCars();
@@ -40,14 +44,14 @@ export class CarComponent implements OnInit {
      
       });
     }
-    deleteCar() {
+    deleteCar(){
       var mytoastr = this.toastrService;
       const data = {
-        CarId: this.carId,
-
+        carId: this.carId,
+       
       };
-     
-      this.carService.deleteCar(data).subscribe(
+      console.log(data)
+     this.carService.deleteCar(data).subscribe(
         (postresponse) => {
           this.modalRef.hide();
           mytoastr.success('veri silindi');
@@ -57,13 +61,12 @@ export class CarComponent implements OnInit {
           // Hata işlemleri
           console.log(error);
           mytoastr.error(' işlem başarısız', 'Dikkat');
-  
         }
       );
     }
     openDeleteModal(template1: TemplateRef<any>, id: number) {
-      // Tıklanan markanın bilgilerini form alanlarına atar
-      this.carId = id; // Bu, Brand ID metin alanını doldurur
+      this.carId = id; 
+  
       this.modalRef = this.modalService.show(template1);
     }
    
