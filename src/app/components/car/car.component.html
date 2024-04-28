@@ -1,11 +1,38 @@
-<!--<table class="table">
-    <tr *ngFor="let car of cars">
-    <td>{{ car.CarName }}</td>
-    <td>{{ car.CarId }}</td>
-    <td>{{ car.NumberPlate }}</td>
-    <td>{{ car.ModelYear }}</td>
-    <td>{{ car.InspectionDate }}</td>
-    <td><img src="{{ car.PermitImage }}" alt="Permit Image"></td>
-</table>
-</tr>-->
-  
+<!-- car-table.component.html -->
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Araç Adı</th>
+                <th>Plaka</th>
+                <th>Model Yılı</th>
+                <th>Muayene Tarihi</th>
+                <th>Ruhsat Fotoğrafı</th>
+                <th>#</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of cars">
+                <td>{{ car.carId }}</td>
+                <td>{{ car.carName }}</td>
+                <td>{{ car.numberPlate }}</td>
+                <td>{{ car.modelYear }}</td>
+                <td>{{ car.inspectionDate }}</td>
+                <td><img [src]="car.PermitImage" alt="Permit Image"></td>
+                <td><button
+                    class="btn btn-danger"
+                    style="margin-right: 10px"
+                    (click)="openDeleteModal(template1,car.carId)"
+                  >
+                    Delete
+                  </button></td>
+               
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
