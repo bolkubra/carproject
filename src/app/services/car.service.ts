@@ -8,6 +8,13 @@ import { Car } from '../models/car';
   providedIn: 'root'
 })
 export class CarService {
+
+
+
+  /*getCarById(carId:number): Observable<CarResponseModel> {
+    let newPath = this.apiUrl+"cars/getbyid?id="+carId
+    return this.httpClient.get<CarResponseModel>(newPath);
+  }*/
   apiUrl = "https://localhost:44380/api/cars";
 
 
@@ -17,14 +24,17 @@ export class CarService {
   getCars() : Observable<CarResponseModel> {
     return this.httpClient.get<CarResponseModel>(this.apiUrl);
     }
-  deleteCar(data: any): Observable<any> {
-      const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // json formatta gönderiyoruz
-      return this.httpClient.post(this.apiUrl + '/delete', data, { headers });
+
+    
+
+  deleteCar(carId:number): Observable<any> {
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      return this.httpClient.post(this.apiUrl + '/delete?carId='+carId, { headers });
     }
    
-  UpdateCar(data: any): Observable<any> {
+  UpdateCar(carModel:any): Observable<any> {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' }); // json formatta gönderiyoruz
-      return this.httpClient.post(this.apiUrl + '/update', data, { headers });
+      return this.httpClient.post(this.apiUrl + '/update' , carModel, { headers });
     }
 
     add(car:Car){

@@ -4,5 +4,5 @@ export interface Car{
     numberPlate:number;
     modelYear:number;
     inspectionDate:number;
-    PermitImage:string;
+    PermitImage:Date;
 }

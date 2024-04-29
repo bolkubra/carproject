@@ -1,6 +1,6 @@
 <!-- car-table.component.html -->
 
-<div class="container">
+<!--<div class="container">
     <table class="table">
         <thead>
             <tr>
@@ -59,4 +59,61 @@
         Çıkış
       </button>
     </div>
-  </ng-template>
+  </ng-template>-->
+
+  <div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Araç Adı</th>
+                <th>Plaka</th>
+                <th>Model Yılı</th>
+                <th>Muayene Tarihi</th>
+                <th>Ruhsat Fotoğrafı</th>
+                <th>#</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of cars">
+                <td>{{ car.carId }}</td>
+                <td>{{ car.carName }}</td>
+                <td>{{ car.numberPlate }}</td>
+                <td>{{ car.modelYear }}</td>
+                <td>{{ car.inspectionDate }}</td>
+                <td><img [src]="car.PermitImage" alt="Permit Image"></td>
+                <td>
+                  <button
+                    class="btn btn-danger"
+                    style="margin-right: 10px"
+                    (click)="openDeleteModal(template1, car.carId)"
+                  >
+                    Sil
+                  </button>
+
+                  <button
+                    class="btn btn-success"
+                    [routerLink]="'cars/update/' + car.carId"
+                  >
+                    Güncelle
+                  </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #template1>
+    <div class="modal-header">
+      <h4 class="modal-title">Silmek istediğine emin misin?</h4>
+    </div>
+    <div class="modal-body">
+      <button type="button" class="btn btn-default" (click)="deleteCar()">
+        Evet
+      </button>
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">
+        Çıkış
+      </button>
+    </div>
+</ng-template>

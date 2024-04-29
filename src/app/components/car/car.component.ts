@@ -46,21 +46,21 @@ export class CarComponent implements OnInit {
     }
     deleteCar(){
       var mytoastr = this.toastrService;
-      const data = {
+      /*const data = {
         carId: this.carId,
        
-      };
-      console.log(data)
-     this.carService.deleteCar(data).subscribe(
+      };*/
+      
+     this.carService.deleteCar(this.carId).subscribe(
         (postresponse) => {
           this.modalRef.hide();
-          mytoastr.success('veri silindi');
+          mytoastr.success('Araç Bilgisi Silindi');
           this.getCars();
         },
         (error) => {
           // Hata işlemleri
           console.log(error);
-          mytoastr.error(' işlem başarısız', 'Dikkat');
+          mytoastr.error(' İşlem Başarısız', 'Dikkat');
         }
       );
     }
@@ -70,5 +70,6 @@ export class CarComponent implements OnInit {
       this.modalRef = this.modalService.show(template1);
     }
    
-  
+    
+    
 }
