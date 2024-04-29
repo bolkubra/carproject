@@ -11,10 +11,7 @@ export class CarService {
 
 
 
-  /*getCarById(carId:number): Observable<CarResponseModel> {
-    let newPath = this.apiUrl+"cars/getbyid?id="+carId
-    return this.httpClient.get<CarResponseModel>(newPath);
-  }*/
+ 
   apiUrl = "https://localhost:44380/api/cars";
 
 
@@ -41,4 +38,13 @@ export class CarService {
       return this.httpClient.post(this.apiUrl+"/insert",car)
     }
 
+    getCarsDetailsId(carId:number):Observable<CarResponseModel>{
+      let newPath =this.apiUrl+"/getbyid?id="+carId
+      return this.httpClient.get<CarResponseModel>(newPath);
+    }
+
+    getCarById(carId:number): Observable<CarResponseModel> {
+    let newPath = this.apiUrl+"/getbyid?id="+carId
+    return this.httpClient.get<CarResponseModel>(newPath);
+  }
 }

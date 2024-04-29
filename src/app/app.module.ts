@@ -14,6 +14,7 @@ import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
 
 import { ToastrModule } from 'ngx-toastr';
 import { CarUpdateComponent } from './components/car-update/car-update.component';
+import { CarDetailComponent } from './components/car-detail/car-detail.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CarUpdateComponent } from './components/car-update/car-update.component
     NaviComponent,
     CarAddComponent,
     CarAddedPipe,
-    CarUpdateComponent
+    CarUpdateComponent,
+    CarDetailComponent
   ],
   imports: [
     BrowserModule,
