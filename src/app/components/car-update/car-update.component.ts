@@ -41,7 +41,7 @@ export class CarUpdateComponent implements OnInit {
       numberPlate: ['', Validators.required],
       modelYear: ['', Validators.required],
       inspectionDate: ['', Validators.required],
-      permitImage: [''] // Dosya seçildiğinde dosya adını tutmak için gerek yok
+      permitImage: [''] 
     });
   }
 
@@ -49,7 +49,7 @@ export class CarUpdateComponent implements OnInit {
     this.carService.getCarsDetailsId(carId).subscribe((response) => {
       this.carDetails = response.data;
       
-      // Tarih değerlerini biçimlendir
+      // Tarih değerlerini biçimlendirir
       const formattedDate = this.datePipe.transform(this.carDetails.inspectionDate, 'yyyy-MM-dd');
       console.log(this.carDetails.inspectionDate)
       const dataFromParent = {
@@ -57,11 +57,11 @@ export class CarUpdateComponent implements OnInit {
         carName: this.carDetails.carName,
         numberPlate: this.carDetails.numberPlate,
         modelYear: this.carDetails.modelYear,
-        inspectionDate: formattedDate, // Biçimlendirilmiş tarih değeri
-        permitImage: this.carDetails.permitImage // Dosya adını saklama ihtiyacı yok
+        inspectionDate: formattedDate, // Biçimlendirilmiş tarih değerini tutuyor
+        permitImage: this.carDetails.permitImage 
       };
 
-      // Forma verileri doldurun
+      // Forma verileri doldurur
       this.carUpdateForm.patchValue(dataFromParent);
     });
   }
@@ -71,7 +71,7 @@ export class CarUpdateComponent implements OnInit {
     const fileInput = event.target as HTMLInputElement;
     if (fileInput.files && fileInput.files.length > 0) {
       this.selectedFile = fileInput.files[0];
-      // Dosya adını permitImage alanına atayalım
+      // Dosya adını permitImage alanına atar
       this.carUpdateForm.patchValue({
         permitImage: this.selectedFile.name
       });
@@ -84,9 +84,9 @@ export class CarUpdateComponent implements OnInit {
     var mytoast = this.toastrService;
     if (this.carUpdateForm.valid) {
       let carId = this.carUpdateForm.value.carId; 
-      // Tarih değerini formatlayalım
+      // Tarih değerini formatlama
       const formattedDate = this.datePipe.transform(this.carUpdateForm.value.inspectionDate, 'yyyy-MM-dd');
-      // Formdan alınan diğer değerlerle birlikte güncellenmiş tarih değerini de modele ekleyelim
+      // Formdan alınan diğer değerlerle birlikte güncellenmiş tarih değerini de modele ekledim
       let carModel = Object.assign({}, this.carUpdateForm.value, { inspectionDate: formattedDate });
       
       this.carService.UpdateCar(carModel).subscribe( 

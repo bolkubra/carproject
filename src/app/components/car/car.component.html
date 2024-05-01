@@ -1,38 +1,41 @@
 <div class="container-fluid p-0 m-0">
-  <table class="table table-striped table-hover">
-      <thead class="text-center">
-          <tr>
-              
-              <th>Araç Adı</th>
-              <th>Plaka</th>
-              <th>Model Yılı</th>
-              <th>Muayene Tarihi</th>
-              <th class="col-4 text-center">Ruhsat Fotoğrafı</th>
-              
-          </tr>
-      </thead>
-      <tbody class="text-center">
-          <tr *ngFor="let car of cars">
-              
-              <td>{{ car.carName | uppercase  }}</td>
-              <td>{{ car.numberPlate | uppercase  }}</td>
-              <td>{{ car.modelYear }}</td>
-              <td>{{ car.inspectionDate | date:'dd.MM.yyyy' }}</td>
-              <td class="col-4 text-center"><img  style="width: 30%;" [src]="getPermitImageUrl(car.permitImage)" alt="Permit Image"></td>
-
-
-              <td>
-                  <button class="btn btn-outline-danger" style="margin-right: 10px"
-                      (click)="openDeleteModal(template1, car.carId)">
-                      Sil
-                  </button>
-                  <button class="btn btn-success" [routerLink]="'cars/update/' + car.carId">
-                      Güncelle
-                  </button>
-              </td>
-          </tr>
-      </tbody>
-  </table>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="text-center">
+            <tr>
+                
+                <th class="d-none d-lg-table-cell">Araç Adı</th>
+                <th>Plaka</th>
+                <th class="d-none d-lg-table-cell">Model Yılı</th>
+                <th class="d-none d-lg-table-cell">Muayene Tarihi</th>
+                <th class="col-4 text-center">Ruhsat Fotoğrafı</th>
+                <th></th>
+                
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            <tr *ngFor="let car of cars">
+                
+                <td class="d-none d-lg-table-cell">{{ car.carName | uppercase  }}</td>
+                <td>{{ car.numberPlate | uppercase  }}</td>
+                <td class="d-none d-lg-table-cell">{{ car.modelYear }}</td>
+                <td class="d-none d-lg-table-cell">{{ car.inspectionDate | date:'dd.MM.yyyy' }}</td>
+                <td class="col-4 text-center"><img class="responsive-image"  [src]="getPermitImageUrl(car.permitImage)" alt="Permit Image"></td>
+  
+  
+                <td>
+                    <button class="btn btn-outline-danger" style="margin-right: 10px"
+                        (click)="openDeleteModal(template1, car.carId)">
+                        Sil
+                    </button>
+                    <button class="btn btn-success mt-1"  [routerLink]="'cars/update/' + car.carId">
+                        Güncelle
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </div>
 
 <ng-template #template1>

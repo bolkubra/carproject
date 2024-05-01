@@ -86,7 +86,7 @@ export class CarComponent implements OnInit {
         this.cars = response.data;
       });
     }
-    // Dosya seçilirken çağrılacak fonksiyon
+   
 
 
 

@@ -8,22 +8,15 @@ import { Car } from '../models/car';
   providedIn: 'root'
 })
 export class CarService {
-
-
-
  
   apiUrl = "https://localhost:44380/api/cars";
   private baseUrl: string = '/Upload/Images/';
-
-
   constructor(private httpClient:HttpClient) { }
 
 
   getCars() : Observable<CarResponseModel> {
     return this.httpClient.get<CarResponseModel>(this.apiUrl);
     }
-
-    
 
   deleteCar(carId:number): Observable<any> {
       const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -35,16 +28,16 @@ export class CarService {
       return this.httpClient.post(this.apiUrl + '/update' , carModel, { headers });
     }
 
-    add(car:Car){
+  add(car:Car){
       return this.httpClient.post(this.apiUrl+"/insert",car)
     }
 
-    getCarsDetailsId(carId:number):Observable<CarResponseModel>{
+  getCarsDetailsId(carId:number):Observable<CarResponseModel>{
       let newPath =this.apiUrl+"/getbyid?id="+carId
       return this.httpClient.get<CarResponseModel>(newPath);
     }
 
-    getCarById(carId:number): Observable<CarResponseModel> {
+  getCarById(carId:number): Observable<CarResponseModel> {
     let newPath = this.apiUrl+"/getbyid?id="+carId
     return this.httpClient.get<CarResponseModel>(newPath);
   }
@@ -55,16 +48,14 @@ export class CarService {
 
 
   onFileSelected(event: any) {
-    const file: File = event.target.files[0]; // Seçilen dosyayı al
-  
-    // FormData nesnesi oluştur
+    const file: File = event.target.files[0]; // Seçilen dosyayı aldım
     const formData = new FormData();
-    formData.append('file', file); // FormData'ya dosyayı ekle
+    formData.append('file', file); // FormData'ya dosyayı ekledim
   
-    // API'ye POST isteği yap
+    
     this.httpClient.post('https://localhost:44380/api/cars/insert', formData)
       .subscribe(response => {
-        console.log(response); // API'den gelen cevabı işle
+        console.log(response); 
       });
     }
 

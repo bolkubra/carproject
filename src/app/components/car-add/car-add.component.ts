@@ -42,28 +42,7 @@ export class CarAddComponent implements OnInit {
     }
   }
 
-  /*add() {
-    if (this.carAddForm.valid) {
-      let carModel = Object.assign({}, this.carAddForm.value);
-      const formData = new FormData();
-      formData.append('carModel', JSON.stringify(carModel));
-      formData.append('file', this.selectedFile);
-  
-      // Dosya seçildiğinde otomatik olarak dosya adını alıp FormData'ya ekleyin
-      formData.append('imageName', this.selectedFile.name); 
-  
-      this.carService.addWithImage(formData).subscribe(response => {
-        console.log(response);
-        this.toastrService.success('Araç Bilgileri Eklendi', 'Başarılı');
-      }, error => {
-        console.error(error);
-        this.toastrService.error('Araç Bilgileri Eklenirken Hata Oluştu', 'Hata');
-      });
-    } else {
-      this.toastrService.error('Form Eksik', 'Dikkat');
-    }
-  }
-*/
+ 
   submitForm() {
     const formData = new FormData();
     formData.append('carName', this.carAddForm.value.carName);
