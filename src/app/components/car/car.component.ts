@@ -27,6 +27,9 @@ export class CarComponent implements OnInit {
     messgae : " ",
     success : true,
   };
+
+  imageUrl = 'https://localhost:44380/Upload/Images/';
+
   constructor(private carService:CarService,
     private toastrService : ToastrService,
     private modalService : BsModalService
@@ -34,6 +37,7 @@ export class CarComponent implements OnInit {
 
   ngOnInit(): void {
    this.getCars();
+   this.getCarImages();
   }
 
   getCars() {
@@ -72,5 +76,18 @@ export class CarComponent implements OnInit {
     }
    
     
+    getPermitImageUrl(imageName: string): string {
+      return this.imageUrl + imageName;
+    }
     
+
+    getCarImages() {
+      this.carService.getCarImages().subscribe((response) => {
+        this.cars = response.data;
+      });
+    }
+    // Dosya seçilirken çağrılacak fonksiyon
+
+
+
 }

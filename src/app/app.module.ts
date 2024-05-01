@@ -10,6 +10,7 @@ import { NaviComponent } from './components/navi/navi.component';
 import { CarAddComponent } from './components/car-add/car-add.component';
 import { CarAddedPipe } from './pipes/car-added.pipe';
 import { ModalModule, BsModalService } from 'ngx-bootstrap/modal';
+import { DatePipe } from '@angular/common';
 
 
 import { ToastrModule } from 'ngx-toastr';
@@ -38,7 +39,7 @@ import { CarDetailComponent } from './components/car-detail/car-detail.component
       positionClass :"toast-bottom-right"}),
    
   ],
-  providers: [BsModalService],
+  providers: [BsModalService,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

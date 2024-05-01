@@ -1,20 +1,39 @@
-<div class="content">
+<div class="content mb-5">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header"><h5 class="title">Araç Ekle</h5>
+            <div class="card-header"><h5 class="title pt-3">Araç Ekle</h5>
                 <div class="card-body">
-                    <form [formGroup]="carAddForm">
+                    <form [formGroup]="carAddForm" (ngSubmit)="submitForm()">
+
                         <div class="form-group">
-                            <input type="text" id="carName" formControlName="carName" class="form-control" placeholder="Araç Adı"/>
-                            <input type="text" id="numberPlate" formControlName="numberPlate" class="form-control" placeholder="Plaka"/>
-                            <input type="text" id="modelYear" formControlName="modelYear" class="form-control" placeholder="Model Yılı"/>
-                            <input type="text" id="inspectionDate" formControlName="inspectionDate" class="form-control" placeholder="Muayene Tarihi"/>
-                            <input type="text" id="PermitImage" formControlName="PermitImage" class="form-control" placeholder="Ruhsat Fotografı"/>
+                            <div class="mb-3">
+                                <label for="carName" class="form-label">Araç Adı</label>
+                                <input type="text" id="carName" formControlName="carName" class="form-control" placeholder="Örn: Toyota"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="numberPlate" class="form-label">Plaka</label>
+                                <input type="text" id="numberPlate" formControlName="numberPlate" class="form-control" placeholder="Örn: 55 ARZ 21"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="modelYear" class="form-label">Model Yılı</label>
+                                <input type="text" id="modelYear" formControlName="modelYear" class="form-control" placeholder="Örn: 2024"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="inspectionDate" class="form-label">Muayene Tarihi</label>
+                                <input type="date" id="inspectionDate" formControlName="inspectionDate" class="form-control" placeholder="Muayene Tarihi"/>
+                            </div>
+                            <div class="mb-3">
+                                <label for="PermitImage" class="form-label">Ruhsat Fotoğrafı</label>
+                                <input type="file" (change)="onFileSelected($event)" id="PermitImage" formControlName="PermitImage" class="form-control" placeholder="Ruhsat Fotografı"/>
+
+                            </div>
+
+                            <input type="hidden" formControlName="ImageName">
                         </div>
                     </form>
                 </div>
-                <div class="card-footer">
-                    <button class="btn btn-fill btn-primary" (click)="add()">EKLE</button>
+                <div class="card-footer pt-3">
+                    <button class="btn btn-primary fs-6 px-3 py-1" (click)="submitForm()">Ekle</button>
                 </div>
             </div>
            

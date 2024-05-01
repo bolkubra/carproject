@@ -30,9 +30,26 @@ export class CarDetailComponent implements OnInit{
 
     getCarDetail(carId: number) {
       this.carService.getCarsDetailsId(carId).subscribe((response) => {
+        
         this.carDetails = response.data;
         
+        
+        
+        if (this.carDetails.length > 0) {
+          const dataFromParent = {
+            carId: this.carDetails[0].carId,
+            carName: this.carDetails[0].carName,
+            numberPlate: this.carDetails[0].numberPlate,
+            modelYear: this.carDetails[0].modelYear,
+            inspectionDate: this.carDetails[0].inspectionDate,
+            permitImage: this.carDetails[0].permitImage // küçük harfle düzeltilmiş
+          };
+    
+        
+        }
       });
     }
-
+    
+    
+  
 }

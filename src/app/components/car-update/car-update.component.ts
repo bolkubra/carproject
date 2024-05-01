@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CarService } from 'src/app/services/car.service';
 import { ActivatedRoute } from '@angular/router'; 
 import { CarDetail } from 'src/app/models/carDetail';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-car-update',
@@ -15,67 +16,79 @@ export class CarUpdateComponent implements OnInit {
   carUpdateForm: FormGroup;
   carId: number; 
   carDetails: any = {};
-  
+  selectedFile: File;
 
   constructor(
     private formBuilder: FormBuilder,
     private carService: CarService,
     private toastrService: ToastrService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private datePipe: DatePipe
   ){}
 
   ngOnInit(): void {
     this.createCarUpdateForm();
     this.activatedRoute.params.subscribe((params) => {
-     
       this.getCarDetail(parseInt(params['carId']));
-      console.log(params)
     });
   }
 
+ 
   createCarUpdateForm() {
     this.carUpdateForm = this.formBuilder.group({
-      carId: [''], // Eksik olan carId alanını ekle
+      carId: [''],
       carName: ['', Validators.required],
       numberPlate: ['', Validators.required],
       modelYear: ['', Validators.required],
       inspectionDate: ['', Validators.required],
-      PermitImage: ['', Validators.required]
+      permitImage: [''] // Dosya seçildiğinde dosya adını tutmak için gerek yok
     });
   }
 
   getCarDetail(carId: number) {
     this.carService.getCarsDetailsId(carId).subscribe((response) => {
+      this.carDetails = response.data;
       
-        console.log(response.data);
-        this.carDetails = response.data;
-        console.log(this.carDetails)
-        
-        const dataFromParent = {
-          carId: this.carDetails.carId,
-          carName: this.carDetails.carName,
-          numberPlate: this.carDetails.numberPlate,
-          modelYear: this.carDetails.modelYear,
-          inspectionDate: this.carDetails.inspectionDate,
-          PermitImage: this.carDetails.PermitImage
-        };
-  
-        // Forma verileri doldurun
-        this.carUpdateForm.patchValue(dataFromParent);
-      
+      // Tarih değerlerini biçimlendir
+      const formattedDate = this.datePipe.transform(this.carDetails.inspectionDate, 'yyyy-MM-dd');
+      console.log(this.carDetails.inspectionDate)
+      const dataFromParent = {
+        carId: this.carDetails.carId,
+        carName: this.carDetails.carName,
+        numberPlate: this.carDetails.numberPlate,
+        modelYear: this.carDetails.modelYear,
+        inspectionDate: formattedDate, // Biçimlendirilmiş tarih değeri
+        permitImage: this.carDetails.permitImage // Dosya adını saklama ihtiyacı yok
+      };
+
+      // Forma verileri doldurun
+      this.carUpdateForm.patchValue(dataFromParent);
     });
   }
-  
-  
-  
 
+  
+  onFileSelected(event: any) {
+    const fileInput = event.target as HTMLInputElement;
+    if (fileInput.files && fileInput.files.length > 0) {
+      this.selectedFile = fileInput.files[0];
+      // Dosya adını permitImage alanına atayalım
+      this.carUpdateForm.patchValue({
+        permitImage: this.selectedFile.name
+      });
+  
+     
+    }
+  }
+  
   addUpdateCar() {
     var mytoast = this.toastrService;
     if (this.carUpdateForm.valid) {
       let carId = this.carUpdateForm.value.carId; 
-      let carModel = Object.assign({}, this.carUpdateForm.value);
-  console.log(carModel);
-  console.log(carId);
+      // Tarih değerini formatlayalım
+      const formattedDate = this.datePipe.transform(this.carUpdateForm.value.inspectionDate, 'yyyy-MM-dd');
+      // Formdan alınan diğer değerlerle birlikte güncellenmiş tarih değerini de modele ekleyelim
+      let carModel = Object.assign({}, this.carUpdateForm.value, { inspectionDate: formattedDate });
+      
       this.carService.UpdateCar(carModel).subscribe( 
         (response) => {
           mytoast.success('Güncelleme başarılı');
@@ -90,6 +103,10 @@ export class CarUpdateComponent implements OnInit {
     }
   }
   
-  
+  formatDate(date: string): string {
+    const parts = date.split('.');
+    const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`;
+    return formattedDate;
+  }
 
 }

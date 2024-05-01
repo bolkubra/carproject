@@ -1,119 +1,53 @@
-<!-- car-table.component.html -->
+<div class="container-fluid p-0 m-0">
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              
+              <th>Araç Adı</th>
+              <th>Plaka</th>
+              <th>Model Yılı</th>
+              <th>Muayene Tarihi</th>
+              <th class="col-4 text-center">Ruhsat Fotoğrafı</th>
+              <th>#</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let car of cars">
+              
+              <td>{{ car.carName }}</td>
+              <td>{{ car.numberPlate }}</td>
+              <td>{{ car.modelYear }}</td>
+              <td>{{ car.inspectionDate | date:'dd.MM.yyyy' }}</td>
+              <td class="col-4 text-center"><img  style="width: 30%;" [src]="getPermitImageUrl(car.permitImage)" alt="Permit Image"></td>
 
-<!--<div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Araç Adı</th>
-                <th>Plaka</th>
-                <th>Model Yılı</th>
-                <th>Muayene Tarihi</th>
-                <th>Ruhsat Fotoğrafı</th>
-                <th>#</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let car of cars">
-                <td>{{ car.carId }}</td>
-                <td>{{ car.carName }}</td>
-                <td>{{ car.numberPlate }}</td>
-                <td>{{ car.modelYear }}</td>
-                <td>{{ car.inspectionDate }}</td>
-                <td><img [src]="car.PermitImage" alt="Permit Image"></td>
-                <td><button
-                    class="btn btn-danger"
-                    style="margin-right: 10px"
-                    (click)="openDeleteModal(template1,car.carId)"
-                  >
-                Sil
+
+              <td>
+                  <button class="btn btn-outline-danger" style="margin-right: 10px"
+                      (click)="openDeleteModal(template1, car.carId)">
+                      Sil
                   </button>
-
-
-                  <button
-                  class="btn btn-success"
-                  routerLink="cars/update/{{ car.carId }}"
-                >
-                  Güncelle
-                </button>
-                
-                </td>
-               
-
-            </tr>
-        </tbody>
-    </table>
+                  <button class="btn btn-success" [routerLink]="'cars/update/' + car.carId">
+                      Güncelle
+                  </button>
+              </td>
+          </tr>
+      </tbody>
+  </table>
 </div>
 
 <ng-template #template1>
-    <div class="modal-header">
+  <div class="modal-header">
       <h4 class="modal-title">Silmek istediğine emin misin?</h4>
-  
-    </div>
-    <div class="modal-body">
-      <button type="button" class="btn btn-default" (click)="deleteCar()">
-        Evet
+  </div>
+  <div class="modal-body">
+      <p>Bu veriyi silmeniz dahilinde geri getiremezsiniz. Yine de devam etmek istiyor musunuz?</p>
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-danger" (click)="deleteCar()">
+          Evet
       </button>
       <button type="button" class="btn btn-default" (click)="modalRef.hide()">
-        Çıkış
+          Vazgeç
       </button>
-    </div>
-  </ng-template>-->
-
-  <div class="container">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Araç Adı</th>
-                <th>Plaka</th>
-                <th>Model Yılı</th>
-                <th>Muayene Tarihi</th>
-                <th>Ruhsat Fotoğrafı</th>
-                <th>#</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let car of cars">
-                <td>{{ car.carId }}</td>
-                <td>{{ car.carName }}</td>
-                <td>{{ car.numberPlate }}</td>
-                <td>{{ car.modelYear }}</td>
-                <td>{{ car.inspectionDate }}</td>
-                <td><img [src]="car.permitImage" alt="Permit Image"></td>
-                <td>
-                  <button
-                    class="btn btn-danger"
-                    style="margin-right: 10px"
-                    (click)="openDeleteModal(template1, car.carId)"
-                  >
-                    Sil
-                  </button>
-
-                  <button
-                    class="btn btn-success"
-                    [routerLink]="'cars/update/' + car.carId"
-                  >
-                    Güncelle
-                  </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
-<ng-template #template1>
-    <div class="modal-header">
-      <h4 class="modal-title">Silmek istediğine emin misin?</h4>
-    </div>
-    <div class="modal-body">
-      <button type="button" class="btn btn-default" (click)="deleteCar()">
-        Evet
-      </button>
-      <button type="button" class="btn btn-default" (click)="modalRef.hide()">
-        Çıkış
-      </button>
-    </div>
+  </div>
 </ng-template>

@@ -38,34 +38,52 @@
 
 <!-- car-update.component.html -->
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
+<div class="mb-3 mt-3">
+    <div class="card p-3">
+        <div class="card-title"><h4 class="title">Güncelle</h4></div>
+        <div class="card-body">
             <form [formGroup]="carUpdateForm" (ngSubmit)="addUpdateCar()">
-                <div class="input-group mb-3">
-                    <input type="number" class="form-control" placeholder="carId" id="carId" formControlName="carId"  />
+                <div class="form-group">
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Araç ID</label>
+                        <input type="number" class="form-control" placeholder="Araç ID" id="carId" formControlName="carId" readonly/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Araç Adı</label>
+                        <input type="text" class="form-control" placeholder="carName" id="carName" formControlName="carName" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Plaka</label>
+                        <input type="text" class="form-control" placeholder="numberPlate" id="numberPlate" formControlName="numberPlate" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Model yılı</label>
+                        <input type="number" class="form-control" placeholder="modelYear" id="modelYear" formControlName="modelYear" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Muayene Tarihi</label>
+                        <input type="date" class="form-control" placeholder="inspectionDate" id="inspectionDate" formControlName="inspectionDate" required/>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="carName" class="form-label">Ruhsat Fotoğrafı</label>
+                        <input type="file" (change)="onFileSelected($event)" id="PermitImage" formControlName="PermitImage" class="form-control" placeholder="Ruhsat Fotografı" required/>
+
+
+                    </div>
+                   
+                    
+                    
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-success">Güncelle</button>
+                    </div>
                 </div>
-                <div class="input-group mb-3">
-                    <label for="carName">Araç Adı</label>
-                    <input type="text" class="form-control" placeholder="carName" id="carName" formControlName="carName" />
-                </div>
-                <div class="input-group mb-3">
-                    <label for="numberPlate">Plaka</label>
-                    <input type="text" class="form-control" placeholder="numberPlate" id="numberPlate" formControlName="numberPlate" />
-                </div>
-                <div class="input-group mb-3">
-                    <label for="modelYear">Model Yılı</label>
-                    <input type="number" class="form-control" placeholder="modelYear" id="modelYear" formControlName="modelYear" />
-                </div>
-                <div class="input-group mb-3">
-                    <label for="inspectionDate">Muayene Tarihi</label>
-                    <input type="datetime" class="form-control" placeholder="inspectionDate" id="inspectionDate" formControlName="inspectionDate" />
-                </div>
-                <div class="input-group mb-3">
-                    <label for="PermitImage">Ruhsat Fotoğrafı</label>
-                    <input type="text" class="form-control" placeholder="permitImage" id="permitImage" formControlName="permitImage" />
-                </div>
-                <button type="submit" class="btn btn-success">Güncelle</button>
+                    
             </form>
         </div>
     </div>

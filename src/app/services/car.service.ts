@@ -13,6 +13,7 @@ export class CarService {
 
  
   apiUrl = "https://localhost:44380/api/cars";
+  private baseUrl: string = '/Upload/Images/';
 
 
   constructor(private httpClient:HttpClient) { }
@@ -47,4 +48,28 @@ export class CarService {
     let newPath = this.apiUrl+"/getbyid?id="+carId
     return this.httpClient.get<CarResponseModel>(newPath);
   }
+
+  getCarImages(): Observable<any> {
+    return this.httpClient.get<any>('https://localhost:44380/api/cars');
+  }
+
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0]; // Seçilen dosyayı al
+  
+    // FormData nesnesi oluştur
+    const formData = new FormData();
+    formData.append('file', file); // FormData'ya dosyayı ekle
+  
+    // API'ye POST isteği yap
+    this.httpClient.post('https://localhost:44380/api/cars/insert', formData)
+      .subscribe(response => {
+        console.log(response); // API'den gelen cevabı işle
+      });
+    }
+
+    
+    addWithImage(car: FormData): Observable<any> {
+      return this.httpClient.post<any>(`${this.apiUrl}/insert`, car);
+    }
 }

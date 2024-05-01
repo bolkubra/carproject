@@ -1,8 +1,9 @@
 export interface CarDetail{
     carId:number;
     carName:string;
-    numberPlate:number;
+    numberPlate:string;
     modelYear:number;
-    inspectionDate:number;
-    permitImage:Date;
+    inspectionDate:string;
+    permitImage:string;
+  
 }
